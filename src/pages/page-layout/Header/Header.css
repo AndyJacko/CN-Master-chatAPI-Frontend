@@ -1,0 +1,8 @@
+.dropdown-menu-dark .dropdown-item.active,
+.dropdown-menu-dark .dropdown-item:active {
+  background: #222222;
+}
+
+.navbar .navbar-toggler:focus {
+  box-shadow: none;
+}

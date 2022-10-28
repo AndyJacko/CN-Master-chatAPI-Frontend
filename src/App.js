@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, useContext } from "react";
+import { Navigate, Routes, Route } from "react-router-dom";
 
-function App() {
+import AuthContext from "./store/authContext";
+import Layout from "./pages/page-layout/Layout";
+import HomePage from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Spinner from "./components/UI/Spinner/Spinner";
+
+const UserAuthPage = React.lazy(() => import("./pages/UserAuth"));
+
+const App = () => {
+  const authCtx = useContext(AuthContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Suspense
+        fallback={
+          <div className="p-5">
+            <Spinner />
+          </div>
+        }>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+
+          {authCtx.isLoggedIn && (
+            <>
+              <Route path="/auth" element={<Navigate replace to="/" />} />
+            </>
+          )}
+
+          {!authCtx.isLoggedIn && (
+            <>
+              <Route path="/auth" element={<UserAuthPage />} />
+            </>
+          )}
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </Layout>
   );
-}
+};
 
 export default App;
