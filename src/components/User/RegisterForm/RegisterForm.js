@@ -31,13 +31,16 @@ const RegisterForm = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:3001/createUser/", {
-      method: "POST",
-      body: JSON.stringify({ username: name, email, password: pass }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://api.doubleornothingyoyos.com/createUser/",
+      {
+        method: "POST",
+        body: JSON.stringify({ username: name, email, password: pass }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const responseData = await response.json();
 
     if (responseData.message === "User Created") {

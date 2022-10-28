@@ -10,7 +10,7 @@ const ChatItem = ({ chat }) => {
   useEffect(() => {
     const getUser = async () => {
       const response = await fetch(
-        `http://localhost:3001/readUser/${chat.userID}/`
+        `https://api.doubleornothingyoyos.com/readUser/${chat.userID}/`
       );
       const responseData = await response.json();
 

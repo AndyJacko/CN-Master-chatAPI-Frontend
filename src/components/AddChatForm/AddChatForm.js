@@ -22,13 +22,16 @@ const AddChatForm = ({ chatAdded, cc }) => {
       return;
     }
 
-    const response = await fetch("http://localhost:3001/createChat/", {
-      method: "POST",
-      body: JSON.stringify({ userID: authCtx.user, chat: chat, tags: tags }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://api.doubleornothingyoyos.com/createChat/",
+      {
+        method: "POST",
+        body: JSON.stringify({ userID: authCtx.user, chat: chat, tags: tags }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const responseData = await response.json();
 
     if (responseData.message === "Chat Created") {

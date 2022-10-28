@@ -31,7 +31,7 @@ const LoginForm = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:3001/login/", {
+    const response = await fetch("https://api.doubleornothingyoyos.com/login/", {
       method: "POST",
       body: JSON.stringify({ username: user, password: pass }),
       headers: {

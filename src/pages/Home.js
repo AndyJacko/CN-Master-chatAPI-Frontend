@@ -14,7 +14,9 @@ const HomePage = () => {
 
   useEffect(() => {
     const getChats = async () => {
-      const response = await fetch("http://localhost:3001/readChats/");
+      const response = await fetch(
+        "https://api.doubleornothingyoyos.com/readChats/"
+      );
       const responseData = await response.json();
       setChats(responseData.chats);
     };
@@ -31,7 +33,9 @@ const HomePage = () => {
   };
 
   const chatAdded = async () => {
-    const response = await fetch("http://localhost:3001/readChats/");
+    const response = await fetch(
+      "https://api.doubleornothingyoyos.com/readChats/"
+    );
     const responseData = await response.json();
     setChats(responseData.chats);
     setAddChat(false);
