@@ -1,0 +1,10 @@
+input::placeholder {
+  text-transform: capitalize;
+}
+
+.todo-input {
+  width: 500px;
+  background: transparent;
+  border: none;
+  color: #999999;
+}

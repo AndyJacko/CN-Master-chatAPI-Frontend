@@ -1,7 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 
 import AuthContext from "../../store/authContext";
-import Input from "../UI/Input/Input";
 import TextArea from "../UI/TextArea/TextArea";
 import Button from "../UI/Button/Button";
 
@@ -10,15 +9,13 @@ const AddChatForm = ({ chatAdded, cc }) => {
   const [message, setMessage] = useState();
 
   const chatInputRef = useRef();
-  const tagsInputRef = useRef();
 
   const onChatSubmit = async (e) => {
     e.preventDefault();
     const chat = chatInputRef.current.value;
-    const tags = tagsInputRef.current.value;
 
-    if (!chat || !tags || chat.trim() === "" || tags.trim() === "") {
-      setMessage(<p className="text-danger">Invalid chat details...</p>);
+    if (!chat || chat.trim() === "") {
+      setMessage(<p className="text-danger">Enter a chat message...</p>);
       return;
     }
 
@@ -26,7 +23,11 @@ const AddChatForm = ({ chatAdded, cc }) => {
       "https://api.doubleornothingyoyos.com/createChat/",
       {
         method: "POST",
-        body: JSON.stringify({ userID: authCtx.user, chat: chat, tags: tags }),
+        body: JSON.stringify({
+          userID: authCtx.user,
+          chat: chat,
+          tags: "tags",
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -41,12 +42,11 @@ const AddChatForm = ({ chatAdded, cc }) => {
     }
 
     chatInputRef.current.value = "";
-    tagsInputRef.current.value = "";
 
     setTimeout(() => {
       setMessage("");
       chatAdded();
-    }, 3000);
+    }, 1000);
   };
 
   const closeChat = () => {
@@ -66,12 +66,6 @@ const AddChatForm = ({ chatAdded, cc }) => {
         {message && message}
 
         <TextArea id="chat" ph="Your chat message" rf={chatInputRef} />
-        <Input
-          id="tags"
-          ty="text"
-          ph="Tags (separated by comma)"
-          rf={tagsInputRef}
-        />
         <Button colour="btn-success" label="Add Chat" />
       </form>
     </div>

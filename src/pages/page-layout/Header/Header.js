@@ -58,7 +58,7 @@ const Header = () => {
           {!authCtx.isLoggedIn && (
             <NavLink
               className={(nD) => navActive(nD)}
-              to="/auth"
+              to="/login"
               onClick={handleCollapse}>
               Login/Register
             </NavLink>

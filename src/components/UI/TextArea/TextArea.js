@@ -6,13 +6,12 @@ const TextArea = ({ id, ph, rf, ...otherProps }) => {
   return (
     <div className="mb-3">
       <textarea
-        rows="5"
+        rows="1"
         className={style}
         id={id}
         ref={rf}
         placeholder={ph}
-        {...otherProps}
-      ></textarea>
+        {...otherProps}></textarea>
     </div>
   );
 };

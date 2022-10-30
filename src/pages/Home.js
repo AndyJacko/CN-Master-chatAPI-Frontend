@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import AuthContext from "../store/authContext";
 import AddChatForm from "../components/AddChatForm/AddChatForm";
@@ -43,21 +44,32 @@ const HomePage = () => {
 
   return (
     <div className="p-5 center">
-      <h2>Chat</h2>
+      <div className="p-3 bg-dark rounded">
+        {!authCtx.isLoggedIn && (
+          <Link
+            to="/login"
+            className="fs-5 text-danger text-uppercase text-decoration-none">
+            Login to chat
+          </Link>
+        )}
 
-      <div className="mt-3 p-3 bg-dark rounded">
         {authCtx.isLoggedIn && !addChat && (
           <div className="w-25" onClick={showAddChat}>
             <Button colour="btn-success" label="Add Chat Message" />
           </div>
         )}
+
         {authCtx.isLoggedIn && addChat && (
           <AddChatForm chatAdded={chatAdded} cc={closeAddChat} />
         )}
 
-        {chats.map((chat) => {
-          return <ChatItem key={chat._id} chat={chat} />;
-        })}
+        <div className="my-3 p-3 border border-light border-opacity-75 rounded shadow">
+          {chats.map((chat) => {
+            return (
+              <ChatItem key={chat._id} chatAdded={chatAdded} chat={chat} />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -25,13 +25,13 @@ const App = () => {
 
           {authCtx.isLoggedIn && (
             <>
-              <Route path="/auth" element={<Navigate replace to="/" />} />
+              <Route path="/login" element={<Navigate replace to="/" />} />
             </>
           )}
 
           {!authCtx.isLoggedIn && (
             <>
-              <Route path="/auth" element={<UserAuthPage />} />
+              <Route path="/login" element={<UserAuthPage />} />
             </>
           )}
 
